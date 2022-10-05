@@ -1,0 +1,26 @@
+html,body{
+    margin: 0;
+    padding: 0;
+}
+
+#content-product{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 800px;
+}
+
+#card{
+    width: 200px;
+    margin: 30px;   
+}
+
+.img-fluid{
+    width: 120px;
+    height: 120px;
+}
+
+#flex{
+    display: flex;
+    justify-content: center;
+}
