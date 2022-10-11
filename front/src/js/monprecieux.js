@@ -6,9 +6,9 @@ function getArtciles(){
         console.log(data.ID);
         let card = document.getElementsByClassName("card-title");
         console.log(card[4])
-        gemmes = [1,5,6,7,8,9,10,11]
+        precieux = [0,2,3,4]
         for(i = 0;i<card.length;i++){
-            card[i].innerHTML = data[gemmes[i]].pierre_name
+            card[i].innerHTML = data[precieux[i]].pierre_name
         } 
     })
     /*
