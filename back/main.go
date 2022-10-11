@@ -89,8 +89,9 @@ func registerHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(register)
 	a, _ := json.Marshal(register)
 	w.Write(a)
-	insert := `INSERT INTO pierrot.user (NAME,PASSWORD, EMAIL) VALUES ("` + register.Name + `","` + `","` + register.Password + `","` + register.Email + `",")`
+	insert := `INSERT INTO pierrot.user (NAME,PASSWORD, EMAIL) VALUES ("` + register.Name + `","` + register.Password + `","` + register.Email + `")`
 	db.Query(insert)
+	fmt.Println(insert)
 	selectID := `SELECT ID FROM pierrot.user WHERE EMAIL="` + register.Email + `"`
 	IDUsr := db.QueryRow(selectID)
 	IDUsr.Scan(&register.ID)
@@ -103,6 +104,7 @@ func registerHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(register.Cart_ID)
 	insertCartID := `UPDATE pierrot.user SET CART_ID="` + strconv.Itoa(register.Cart_ID) + `" WHERE ID="` + strconv.Itoa(register.ID) + `"`
 	db.Query(insertCartID)
+
 }
 
 func loginHandler(w http.ResponseWriter, r *http.Request) {
@@ -111,12 +113,14 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 	var user User
 	decoder := json.NewDecoder(r.Body)
 	decoder.Decode(&user)
-	emailVar := `SELECT ID, NAME,PASSWORD, EMAIL,PP, CART_ID, FROM pierrot.user WHERE EMAIL="` + user.Email + `" AND PASSWORD="` + user.Password + `"`
+	emailVar := `SELECT ID, NAME,PASSWORD, EMAIL,PP, CART_ID FROM pierrot.user WHERE EMAIL="` + user.Email + `" AND PASSWORD="` + user.Password + `"`
 	fmt.Println(emailVar)
 	var getRaw = db.QueryRow(emailVar)
 	getRaw.Scan(&user.ID, &user.Name, &user.Password, &user.Email, &user.PP, &user.Cart_ID)
 	fmt.Println(user.ID)
 	fmt.Println(user)
+	a, _ := json.Marshal(user)
+	w.Write(a)
 }
 
 // func cartHandler(w http.ResponseWriter, r *http.Request) {

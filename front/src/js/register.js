@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     loginForm.addEventListener("submit", e => {
+        var test = false
         e.preventDefault();
         var text = document.getElementById("text_login");
         var pass = document.getElementById("pass_login");
@@ -44,7 +45,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 email:text.value,
                 password:pass.value
             })
+        }).then((data) => data.json())
+        .then((data) => {
+            console.log(data.name)
+            console.log(data)
+            if (data.ID>0){
+                test = true
+            }
+            console.log(test)
         })
+
         setFormMessage(loginForm, "error", "Invalid username/password combination");
     });
     createAccountForm.addEventListener("submit",e=>{
