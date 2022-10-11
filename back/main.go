@@ -15,14 +15,12 @@ import (
 var db, _ = sql.Open("mysql", "root:@tcp(localhost)/pierrot")
 
 type User struct {
-	ID        int    `json:"ID"`
-	Name      string `json:"name"`
-	Firstname string `json:"firstname"`
-	Password  string `json:"password"`
-	Email     string `json:"email"`
-	PP        string `json:"PP"`
-	Cart_ID   int    `json:"cart_ID"`
-	Birthday  string `json:"birthday"`
+	ID       int    `json:"ID"`
+	Name     string `json:"name"`
+	Password string `json:"password"`
+	Email    string `json:"email"`
+	PP       string `json:"PP"`
+	Cart_ID  int    `json:"cart_ID"`
 }
 
 type Session struct {
@@ -87,8 +85,11 @@ func registerHandler(w http.ResponseWriter, r *http.Request) {
 	var register User
 	decoder := json.NewDecoder(r.Body)
 	decoder.Decode(&register)
+	fmt.Println(register.Name)
 	fmt.Println(register)
-	insert := `INSERT INTO pierrot.user (NAME, FIRSTNAME, PASSWORD, EMAIL, BIRTHDAY) VALUES ("` + register.Name + `","` + register.Firstname + `","` + register.Password + `","` + register.Email + `","` + register.Birthday + `")`
+	a, _ := json.Marshal(register)
+	w.Write(a)
+	insert := `INSERT INTO pierrot.user (NAME,PASSWORD, EMAIL) VALUES ("` + register.Name + `","` + `","` + register.Password + `","` + register.Email + `",")`
 	db.Query(insert)
 	selectID := `SELECT ID FROM pierrot.user WHERE EMAIL="` + register.Email + `"`
 	IDUsr := db.QueryRow(selectID)
@@ -110,10 +111,11 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 	var user User
 	decoder := json.NewDecoder(r.Body)
 	decoder.Decode(&user)
-	emailVar := `SELECT ID, NAME, FIRSTNAME, PASSWORD, EMAIL, CART_ID, BIRTHDAY FROM pierrot.user WHERE EMAIL="` + user.Email + `" AND PASSWORD="` + user.Password + `"`
+	emailVar := `SELECT ID, NAME,PASSWORD, EMAIL,PP, CART_ID, FROM pierrot.user WHERE EMAIL="` + user.Email + `" AND PASSWORD="` + user.Password + `"`
 	fmt.Println(emailVar)
 	var getRaw = db.QueryRow(emailVar)
-	getRaw.Scan(&user.ID, &user.Name, &user.Firstname, &user.Password, &user.Email, &user.Cart_ID, &user.Birthday)
+	getRaw.Scan(&user.ID, &user.Name, &user.Password, &user.Email, &user.PP, &user.Cart_ID)
+	fmt.Println(user.ID)
 	fmt.Println(user)
 }
 
@@ -151,7 +153,7 @@ func userHandler(w http.ResponseWriter, r *http.Request) {
 	var query, _ = db.Query("SELECT * FROM pierrot.user")
 	for query.Next() {
 		var user User
-		query.Scan(&user.ID, &user.Name, &user.Firstname, &user.Password, &user.Email, &user.PP, user.Cart_ID, user.Birthday)
+		query.Scan(&user.ID, &user.Name, &user.Password, &user.Email, &user.PP, user.Cart_ID)
 		users = append(users, user)
 	}
 	fmt.Println(users)
@@ -168,6 +170,6 @@ func main() {
 	// http.HandleFunc("/api/cart", cartHandler)
 	http.HandleFunc("/api/user", userHandler)
 
-	log.Fatal(http.ListenAndServe(":55", nil))
+	log.Fatal(http.ListenAndServe(":50", nil))
 
 }
