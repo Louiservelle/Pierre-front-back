@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	//"net/smtp"
 	"path"
 	"strconv"
 
@@ -122,6 +123,51 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 	a, _ := json.Marshal(user)
 	w.Write(a)
 }
+func mdpoublie(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Content-Type", "application/json")
+	var user User
+	decoder := json.NewDecoder(r.Body)
+	decoder.Decode(&user)
+	emailVar := `SELECT ID, NAME,PASSWORD, EMAIL,PP, CART_ID FROM pierrot.user WHERE EMAIL="` + user.Email + `"`
+	fmt.Println(emailVar)
+	var getRaw = db.QueryRow(emailVar)
+	getRaw.Scan(&user.ID, &user.Name, &user.Password, &user.Email, &user.PP, &user.Cart_ID)
+	fmt.Println(user.ID)
+	fmt.Println(user)
+	a, _ := json.Marshal(user)
+	w.Write(a)
+}
+/*func envoiemail() {
+	// Sender data.
+	from := "brainbotcnm@gmail.com"
+	password := "RespectGUCC1"
+
+	// Receiver email address.
+	to := []string{
+		"sender@example.com",
+	}
+
+	// smtp server configuration.
+	smtpHost := "smtp.gmail.com"
+	smtpPort := "587"
+
+	// Message.
+	message := []byte("This is a test email message.")
+
+	// Authentication.
+	auth := smtp.PlainAuth("", from, password, smtpHost)
+
+	// Sending email.
+	err := smtp.SendMail(smtpHost+":"+smtpPort, auth, from, to, message)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Println("Email Sent Successfully!")
+}
+*/
+
 
 // func cartHandler(w http.ResponseWriter, r *http.Request) {
 // 	w.Header().Set("Access-Control-Allow-Origin", "*")
@@ -171,6 +217,7 @@ func main() {
 	http.HandleFunc("/api/login", loginHandler)
 	http.HandleFunc("/api/pierre", pierresHandler)
 	http.HandleFunc("/api/pierre/", pierreHandler)
+	http.HandleFunc("/api/oublie", mdpoublie)
 	// http.HandleFunc("/api/cart", cartHandler)
 	http.HandleFunc("/api/user", userHandler)
 
