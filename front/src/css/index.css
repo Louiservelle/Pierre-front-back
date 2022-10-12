@@ -1,16 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Parisienne&display=swap');
 
+html,body{
+    margin: 0;
+    padding: 0;
+    background-color: #FFF5EE;
+}
 
 #header{
     background-color: #ecdcd1;
     color: black;
     font-family: 'Parisienne', cursive;
 }
-html,body{
-    margin: 0;
-    padding: 0;
-    background-color: #FFF5EE;
-}
+
 .nav-item{
     color: black;
     font-size: 25px;

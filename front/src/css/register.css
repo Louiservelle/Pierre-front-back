@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Parisienne&display=swap');
 body {
   --color-primary: #009579;
   --color-primary-dark: #007f67;
@@ -13,23 +14,25 @@ body {
   justify-content: center;
   font-size: 18px;
   background: url(./background.jpg);
+  background-color: #FFF5EE;
   background-size: cover;
 }
 
 .container {
+  font-family: 'Parisienne', cursive;
   width: 400px;
   max-width: 400px;
   margin: 1rem;
   padding: 2rem;
   box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
   border-radius: var(--border-radius);
-  background: #ffffff;
+  background: #ecdcd1;
 }
 
 .container,
 .form__input,
 .form__button {
-  font: 500 1rem 'Quicksand', sans-serif;
+  font-family: 'Parisienne', cursive;
 }
 
 .form--hidden {
@@ -47,6 +50,7 @@ body {
 .form__title {
   margin-bottom: 2rem;
   text-align: center;
+  font-family: 'Parisienne', cursive;
 }
 
 .form__message {
@@ -117,6 +121,7 @@ body {
 
 .form__text {
   text-align: center;
+  font-family: 'Parisienne', cursive;
 }
 
 .form__link {

@@ -2,11 +2,13 @@
 html,body{
     margin: 0;
     padding: 0;
-    background-color: #c2c2c243 !important;
+    background-color: #FFF5EE !important;
 }
-
+.btn-success{
+   background-color:  #009579 !important
+}
 #navbar{
-    background-color: #C2C2C2;
+    background-color: #ecdcd1;
     color: black;
     font-family: 'Parisienne', cursive;
 }
@@ -15,7 +17,7 @@ html,body{
     font-size: 25px;
 }
 #footer{
-    background-color: #C2C2C2;
+    background-color: #ecdcd1;
 }
 
 
@@ -29,7 +31,6 @@ html,body{
 #card{
     width: 200px;
     margin: 30px;  
-    border: 1px solid black; 
 }
 
 #card img{
