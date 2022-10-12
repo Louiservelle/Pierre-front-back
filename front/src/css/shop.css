@@ -49,3 +49,6 @@ html,body{
 .footer{
     color: black;
 }
+.hidden{
+    display:none
+}
