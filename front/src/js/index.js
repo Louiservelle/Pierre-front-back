@@ -1,5 +1,13 @@
 getArtciles();
+function reqListener(){
+    console.log(this.reponseText);
+}
 
+let nom = document.getElementById("nomUtilisateur");
+let utilisateur =document.cookie
+console.log(utilisateur)
+if (utilisateur.length>0)
+nom.innerHTML = utilisateur
 
 function getArtciles(){
     fetch ('http://localhost:50/api/pierre')

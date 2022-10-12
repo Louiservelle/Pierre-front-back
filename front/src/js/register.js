@@ -56,8 +56,8 @@ document.addEventListener("DOMContentLoaded", () => {
             if(test == false){
                 setFormMessage(loginForm, "error", "Invalid username/password combination");
             }else if (test == true){
+                document.cookie = data.name
                 document.location.href="http://127.0.0.1:5500/front/index.html";
-                console.log("ouioui")
             }
         })
     });
