@@ -50,4 +50,10 @@ html,body{
     padding-top: 13px;
     color: black;
     opacity: 50%;
+    font-size: 30px;
+}
+
+#logout{
+    font-size: 30px;
+    padding-top: 13px;
 }

@@ -6,8 +6,11 @@ function reqListener(){
 let nom = document.getElementById("nomUtilisateur");
 let utilisateur =document.cookie
 console.log(utilisateur)
-if (utilisateur.length>0)
-nom.innerHTML = utilisateur
+if (utilisateur.length>0){
+    nom.innerHTML = utilisateur
+    nom.style.display = 'none'
+}
+
 
 function getArtciles(){
     fetch ('http://localhost:50/api/pierre')
