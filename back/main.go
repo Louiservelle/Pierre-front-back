@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+
 	//"net/smtp"
 	"path"
 	"strconv"
@@ -138,6 +139,7 @@ func mdpoublie(w http.ResponseWriter, r *http.Request) {
 	a, _ := json.Marshal(user)
 	w.Write(a)
 }
+
 /*func envoiemail() {
 	// Sender data.
 	from := "brainbotcnm@gmail.com"
@@ -167,7 +169,6 @@ func mdpoublie(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Email Sent Successfully!")
 }
 */
-
 
 // func cartHandler(w http.ResponseWriter, r *http.Request) {
 // 	w.Header().Set("Access-Control-Allow-Origin", "*")

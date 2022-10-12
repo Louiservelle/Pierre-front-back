@@ -1,21 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Parisienne&display=swap');
+
+
+#header{
+    background-color: #ecdcd1;
+    color: black;
+    font-family: 'Parisienne', cursive;
+}
 html,body{
     margin: 0;
     padding: 0;
-    background-color: #c2c2c243;
-}
-
-#header{
-    background-color: #C2C2C2;
-    color: black;
-    font-family: 'Parisienne', cursive;
+    background-color: #FFF5EE;
 }
 .nav-item{
     color: black;
     font-size: 25px;
 }
 #footer{
-    background-color: #C2C2C2;
+    background-color: #ecdcd1;
 }
 
 
@@ -29,7 +30,6 @@ html,body{
 #card{
     width: 200px;
     margin: 30px;  
-    border: 1px solid black; 
 }
 
 .img-fluid{
