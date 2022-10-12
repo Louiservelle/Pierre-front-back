@@ -45,3 +45,9 @@ html,body{
 .footer{
     color: black;
 }
+
+#account{
+    padding-top: 13px;
+    color: black;
+    opacity: 50%;
+}
