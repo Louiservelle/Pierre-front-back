@@ -2,15 +2,28 @@ getArtciles();
 function reqListener(){
     console.log(this.reponseText);
 }
-
+let accountt = document.getElementById("compte");
+let logoutt = document.getElementById("logout")
 let nom = document.getElementById("nomUtilisateur");
-let utilisateur =document.cookie
+let utilisateur = sessionStorage.getItem("name")
 console.log(utilisateur)
 if (utilisateur.length>0){
     nom.innerHTML = utilisateur
-    nom.style.display = 'none'
+    nom.style.padding ='20px'
+    console.log(accountt);
+    console.log(logoutt); 
+    accountt.classList.add("hidden");
+    logoutt.classList.add("hidden");
+    logoutt.classList.remove("hidden");
 }
 
+function deco(){
+    sessionStorage.clear();
+    accountt.classList.remove("hidden");
+    logoutt.classList.add('hidden');
+    nom.classList.add('hidden');
+    nom.innerHTML = ""
+}
 
 function getArtciles(){
     fetch ('http://localhost:50/api/pierre')
@@ -23,5 +36,3 @@ function getArtciles(){
     })
     .catch(error => alert("Erreur" + error));
 }
-
-

@@ -54,6 +54,12 @@ html,body{
 }
 
 #logout{
-    font-size: 30px;
     padding-top: 13px;
+    color: black;
+    opacity: 50%;
+    font-size: 30px;
+}
+
+.hidden{
+    display: none;
 }

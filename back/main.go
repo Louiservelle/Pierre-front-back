@@ -6,11 +6,9 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-
 	//"net/smtp"
 	"path"
 	"strconv"
-
 	_ "github.com/go-sql-driver/mysql"
 )
 
