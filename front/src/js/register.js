@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             console.log(test)
             if(test == false){
-                setFormMessage(loginForm, "error", "Invalid username/password combination");
+                setFormMessage(loginForm, "error", "Invalide username/password combination");
             }else if (test == true){
                 sessionStorage.setItem("name",data.name)
                 document.location.href="http://127.0.0.1:5500/front/index.html";
