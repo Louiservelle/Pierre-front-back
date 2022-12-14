@@ -1,5 +1,5 @@
 function getArtciles(){
-    fetch ('http://localhost:50/api/pierre')
+    fetch ('http://localhost:51/api/pierre')
     .then((data) => data.json())
     .then((data) => {
         console.log(data.pierre_name)
@@ -20,6 +20,8 @@ function getArtciles(){
     */
     .catch(error => alert("Erreur" + error));
 }
-
+function buy(){
+    
+}
 getArtciles();
 

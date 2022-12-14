@@ -14,7 +14,7 @@ mdpoublie.addEventListener("submit", e => {
     var email = document.getElementById("text_login");
     console.log(email.value)
     // Perform your AJAX/Fetch login
-    fetch('http://localhost:50/api/oublie',{
+    fetch('http://localhost:51/api/oublie',{
         method:'POST',
         body:JSON.stringify({
             email:email.value,

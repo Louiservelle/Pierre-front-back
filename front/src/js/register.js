@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
         var pass = document.getElementById("pass_login");
         console.log(text.value,pass.value)
         // Perform your AJAX/Fetch login
-        fetch('http://localhost:50/api/login',{
+        fetch('http://localhost:51/api/login',{
             method:'POST',
             body:JSON.stringify({
                 email:text.value,
@@ -57,6 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 setFormMessage(loginForm, "error", "Invalid username/password combination");
             }else if (test == true){
                 sessionStorage.setItem("name",data.name)
+                sessionStorage.setItem("id",data.ID)
                 document.location.href="http://127.0.0.1:5500/front/index.html";
             }
         })
@@ -70,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log(pass.value)
         console.log(email.value)
         // Perform your AJAX/Fetch login
-        fetch('http://localhost:50/api/register',{
+        fetch('http://localhost:51/api/register',{
             method:'POST',
             body:JSON.stringify({
                 Name : name.value,
@@ -82,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.querySelectorAll(".form__input").forEach(inputElement => {
         inputElement.addEventListener("blur", e => {
-            if (e.target.id === "signupUsername" && e.target.value.length > 0 && e.target.value.length < 2) {
+            if (e.target.id === "signupUsername" && e.target.value.length > 0 && e.target.value.length < 6) {
                 setInputError(inputElement, "Username must be at least 10 characters in length");
             }
         });

@@ -6,9 +6,11 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+
 	//"net/smtp"
 	"path"
 	"strconv"
+
 	_ "github.com/go-sql-driver/mysql"
 )
 
@@ -43,6 +45,11 @@ type Avis struct {
 	User_ID   int    `json:"user_ID"`
 	Note      string `json:"note"`
 	Text      string `json:"text"`
+}
+type Cart struct {
+	ID        int `json:"ID"`
+	Pierre_ID int `json:"pierre_ID"`
+	User_ID   int `json:"user_ID"`
 }
 
 func apiHandler(w http.ResponseWriter, r *http.Request) {
@@ -168,14 +175,36 @@ func mdpoublie(w http.ResponseWriter, r *http.Request) {
 }
 */
 
-// func cartHandler(w http.ResponseWriter, r *http.Request) {
-// 	w.Header().Set("Access-Control-Allow-Origin", "*")
-// 	w.Header().Set("Content-Type", "application/json")
-// 	var pierre Pierre
-// 	decoder := json.NewDecoder(r.Body)
-// 	decoder.Decode(&pierre)
-// 	pierreVar := `INSERT INTO labaiepierre.cart  (USER_ID, PIERRE_ID) VALUES ("` + strconv.Itoa(pierre.ID) + `")`
-// }
+func adddcartHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Content-Type", "application/json")
+	var pierre Pierre
+	decoder := json.NewDecoder(r.Body)
+	decoder.Decode(&pierre)
+	pierreVar := `INSERT INTO pierrot.cart  (USER_ID, PIERRE_ID) VALUES ("` + strconv.Itoa(pierre.ID) + `";")`
+	db.Query(pierreVar)
+}
+
+func cartHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Content-Type", "application/json")
+
+	var pouet int
+	decoder := json.NewDecoder(r.Body)
+	decoder.Decode(&pouet)
+	fmt.Println(pouet)
+
+	var query, _ = db.Query(`SELECT * FROM pierrot.cart WHERE USER_ID="` + strconv.Itoa(pouet) + `"`)
+	var allCart []Cart
+	for query.Next() {
+		var cart Cart
+		query.Scan(&cart.ID, &cart.User_ID, &cart.Pierre_ID)
+		allCart = append(allCart, cart)
+	}
+	fmt.Println(allCart)
+	a, _ := json.Marshal(allCart)
+	w.Write(a)
+}
 
 func pierresHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
@@ -217,9 +246,9 @@ func main() {
 	http.HandleFunc("/api/pierre", pierresHandler)
 	http.HandleFunc("/api/pierre/", pierreHandler)
 	http.HandleFunc("/api/oublie", mdpoublie)
-	// http.HandleFunc("/api/cart", cartHandler)
+	http.HandleFunc("/api/cart", cartHandler)
 	http.HandleFunc("/api/user", userHandler)
-
-	log.Fatal(http.ListenAndServe(":50", nil))
+	http.HandleFunc("/api/add", adddcartHandler)
+	log.Fatal(http.ListenAndServe(":51", nil))
 
 }

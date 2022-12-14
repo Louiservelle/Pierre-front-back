@@ -10,7 +10,7 @@ cherche.addEventListener("input", e => {
     var comparelettre = true
     console.log(email.value)
     console.log(pierrre)
-    for(i=0;i<pierrre.length;i++){
+    for(i=0;i<pierrre.length;i++){git 
         comparelettre = true
         console.log(email.value)
         for(z=0;z<email.value.length;z++){
@@ -30,7 +30,7 @@ cherche.addEventListener("input", e => {
 
 function getArtciles(){
     let oui = []
-    fetch ('http://localhost:50/api/pierre')
+    fetch ('http://localhost:51/api/pierre')
     .then((data) => data.json())
     .then((data) => {
         //console.log(data.pierre_name)

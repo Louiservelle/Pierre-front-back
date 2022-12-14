@@ -1,5 +1,5 @@
 //params name,img,prix,descrip
-function createCard(){
+function createCard(name,price,descrip){
     let boxpanier = document.getElementById('boxpanier');
     let panier = document.createElement('div')
     panier.id = 'panier'
@@ -16,25 +16,25 @@ function createCard(){
     itembox.style.display = 'flex'
     itembox.style.flexDirection = 'row-reverse'
     itembox.style.alignItems = 'center';
-    itembox.innerText ='proudit'
+    itembox.innerText = name
     itembox.style.fontSize = '25px'
     itembox.style.fontFamily = 'Parisienne';
 
 
     let image = document.createElement('img');
-    image.src ="/front/images/rubis.jpg";
+    image.src ="/front/images/"+name+".jpg";
     image.style.width = '120px'
     image.style.height = '120px'
     image.style.paddingRight = '20px';
 
     let prix = document.createElement('h2');
-    prix.innerHTML = '30 £'
+    prix.innerHTML = price + "$"
     prix.style.fontSize = '';
     prix.style.fontFamily = 'Parisienne';
 
     let boxdesc = document.createElement('div');
     let description = document.createElement('p');
-    description.innerHTML = 'Ruby Rouhe rare'
+    description.innerHTML = descrip
     description.style.fontSize = '25px'
     description.style.fontFamily = 'Parisienne';
 
@@ -44,8 +44,34 @@ function createCard(){
     itembox.appendChild(image)
     panier.appendChild(boxdesc)
     boxdesc.appendChild(description);
-    boxdesc.appendChild(prix);
+    boxdesc.appendChild(prix);  
+}
+getCart()
+function getCart(){
+    let userid = sessionStorage.getItem("id")
+    console.log(userid)
+    fetch('http://localhost:51/api/cart',{
+        method:'POST',
+        body:JSON.parse(userid)
+    }).then((data) => data.json())
+    .then((data) => {
+        console.log(data[2].pierre_ID)
+        for(i=0;i<data.length;i++){
+            GetParameterForCreateCard(data[i].pierre_ID)
+        }
+    })
+}
     
 
-     
+
+
+function GetParameterForCreateCard(ID){
+    fetch ('http://localhost:51/api/pierre/'+ID)
+    .then((data) => data.json())
+    .then((data) => {
+        createCard(data.pierre_name,data.pierre_price,data.pierre_description)
+        console.log(data.pierre_name,data.pierre_price)
+    })
 }
+
+
